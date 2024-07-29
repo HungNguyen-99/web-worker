@@ -1,0 +1,27 @@
+@if (vm$ | async; as vm) {
+<ng-container [formGroup]="form">
+  <select formControlName="book">
+    @for (item of vm.books; track $index) {
+    <option [value]="item.url">
+      {{ item.name }}
+    </option>
+    }
+  </select>
+
+  <input type="text" formControlName="searchTerm" />
+</ng-container>
+
+<span>
+  <span>{{ vm.searchedParagraphCount }} / {{ vm.paragraphCount }}</span>
+  <span>({{ vm.progress }})</span>
+</span>
+
+@for (item of vm.paragraphMatches; track $index) {
+<hr />
+<blockquote>
+  <span>{{ item.before }}</span>
+  <strong>{{ item.match }}</strong>
+  <span>{{ item.after }}</span>
+  <footer>Score: {{ item.score }}</footer>
+</blockquote>
+} }
